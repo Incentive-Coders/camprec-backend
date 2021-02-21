@@ -30,4 +30,4 @@ let StudentSchemas = mongoose.Schema({
     }
 });
 
-module.exports = StudentSchemas = mongoose.model('user',StudentSchema);
+module.exports = StudentSchemas = mongoose.model('user',StudentSchemas);

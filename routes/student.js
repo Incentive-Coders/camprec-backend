@@ -3,8 +3,8 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
-const StudentSchema = require('../schemas/student.ts');
-const User = require("../schemas/student.ts");
+const StudentSchema = require('../schemas/student');
+const User = require("../schemas/student");
 const config = require('config');
 
 router.get(
@@ -25,7 +25,7 @@ router.post(
     ],
     async (req,res) => {
         try{
-            let { email,password,names,college,cgpa,about,premium } = req.body;
+            let { email,password,name,college,cgpa,about,premium } = req.body;
             let user = await StudentSchema.findOne({email : email});
             const errors = validationResult(req);
             if(!errors.isEmpty())
@@ -43,7 +43,7 @@ router.post(
             user = new StudentSchema({
                 email,
                 password,
-                names,
+                name,
                 college,
                 cgpa,
                 about,
