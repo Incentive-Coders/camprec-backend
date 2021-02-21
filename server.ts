@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
-const connectToDatabases = require('./config/connectToDatabase');
+const connectToDatabases = require('./config/connectToDatabase.ts');
 
 connectToDatabases();
 
 app.use(express.json({ extended: false }));
 
-app.use("/api/users", require('./routes/users'));
+app.use("/api/student", require('./routes/student'));
 
 let PORT = process.env.PORT || 3000;
 
