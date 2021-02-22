@@ -47,10 +47,13 @@ let CollegeSchemas = mongoose.Schema({
     vedio_link : {
         type : String
     },
+    student : [{
+        type : mongoose.Schema.ObjectId
+    }],
     premium:{
         type : Boolean,
         required : true
     }
 });
 
-module.exports = CompanySchemas = mongoose.model('college',CollegeSchemas);
+module.exports = CollegeSchemas = mongoose.model('college',CollegeSchemas);

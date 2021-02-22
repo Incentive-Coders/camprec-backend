@@ -88,6 +88,9 @@ let StudentSchemas = mongoose.Schema({
         },
         instagram : {
             type : String
+        },
+        github : {
+            type : String
         }
     },
     contactno : {
