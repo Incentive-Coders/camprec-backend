@@ -25,7 +25,10 @@ router.post(
     ],
     async (req,res) => {
         try{
-            let { email,password,name,college,cgpa,about,premium } = req.body;
+            let {profile_image : {file_name,file_content},email,password,name,college,cgpa,about,experience : [{names,description,duration,link}],
+            education : [{course,institute,marks}],
+            certification : [{courses,institutes,valid_till,links}],
+            skills : [],resume,premium } = req.body;
             let student = await StudentSchema.findOne({email : email});
             const errors = validationResult(req);
             if(!errors.isEmpty())
@@ -41,15 +44,20 @@ router.post(
             password = await bcryptjs.hash(password,salt);
 
             student = new StudentSchema({
+                profile_image : {file_name,file_content},
                 email,
                 password,
                 name,
                 college,
                 cgpa,
                 about,
-                premium
+                experience : [{names,description,duration,link}],
+                education : [{course,institute,marks}],
+                certification : [{courses,institutes,valid_till,links}],
+                skills : [],
+                resume,
+                premium,
              });
-
              await student.save();
 
              const payload = {
