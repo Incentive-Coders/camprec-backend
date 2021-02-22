@@ -9,7 +9,7 @@ const config = require('config');
 
 router.get(
     '/',
-    async (res) => {
+    async (req,res) => {
     return res.status(200).json({msg : "hello"});
     });
 

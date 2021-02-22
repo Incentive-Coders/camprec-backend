@@ -6,7 +6,9 @@ connectToDatabases();
 
 app.use(express_.json({ extended: false }));
 
-app.use("/api/student", require('./routes/student.js'));
+app.use("/api/student", require('./routes/student'));
+
+app.use("/api/company", require('./routes/company'));
 
 let PORT = process.env.PORT || 3000;
 
