@@ -23,7 +23,10 @@ let StudentSchemas = mongoose.Schema({
         required : true
     },
     about:{
-        type : String,
+        type : String
+    },
+    DOB:{
+        type : Date
     },
     experience : [{
         names : {
@@ -71,6 +74,23 @@ let StudentSchemas = mongoose.Schema({
         type : String
     }],
     resume : {
+        type : String
+    },
+    social_media : {
+        twitter : {
+            type : String
+        },
+        facebook : {
+            type : String
+        },
+        linkedin : {
+            type : String
+        },
+        instagram : {
+            type : String
+        }
+    },
+    contactno : {
         type : String
     },
     premium:{
