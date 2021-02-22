@@ -1,15 +1,7 @@
 const mongoose = require('mongoose');
-const {fileDetails}  = require('mongofileupload');
+
 
 let StudentSchemas = mongoose.Schema({
-    profile_image : {
-        file_name : {
-            type : String
-        },
-        file_content : {
-            type : mongoose.Mixed
-        }
-    },
     email: {
         type : String,
         required : true 

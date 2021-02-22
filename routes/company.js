@@ -3,8 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
-const StudentSchema = require('../schemas/student');
-const Student = require("../schemas/student");
+const CompanySchema = require('../schemas/company');
 const config = require('config');
 
 router.get(
@@ -19,49 +18,44 @@ router.post(
         check('email','E-mail is required').isEmail(),
         check('password','Password is required').not().isEmpty(),
         check('name','name is required').not().isEmpty(),
-        check('college','college is required').not().isEmpty(),
-        check('cgpa','cgpa is required').not().isEmpty(),
         check('premium','premium is required').not().isEmpty(),
+        check('location','location is required').not().isEmpty(),
+        check('year_of_established','year_of_established is required').not().isEmpty(),
     ],
     async (req,res) => {
         try{
-            let {email,password,name,college,cgpa,about,experience : [{names,description,duration,link}],
-            education : [{course,institute,marks}],
-            certification : [{courses,institutes,valid_till,links}],
-            skills : [],resume,premium } = req.body;
-            let student = await StudentSchema.findOne({email : email});
+            let {email,password,name,about,year_of_established,location,website,social_media : {twitter,facebook,linkedin,instagram},vedio_link,premium } = req.body;
+            let company = await CompanySchema.findOne({email : email});
             const errors = validationResult(req);
             if(!errors.isEmpty())
             {
                 return res.status(401).json({errors : errors.array()});
             }
 
-            if(student){
+            if(company){
                 return res.status(401).json({ msg : "present"})
             }
             
             const salt = await bcryptjs.genSalt(10);
             password = await bcryptjs.hash(password,salt);
 
-            student = new StudentSchema({
+            company = new CompanySchema({
                 email,
                 password,
                 name,
-                college,
-                cgpa,
                 about,
-                experience : [{names,description,duration,link}],
-                education : [{course,institute,marks}],
-                certification : [{courses,institutes,valid_till,links}],
-                skills : [],
-                resume,
-                premium,
+                year_of_established,
+                location,
+                website,
+                social_media : {twitter,facebook,linkedin,instagram},
+                vedio_link,
+                premium
              });
-             await student.save();
+             await company.save();
 
              const payload = {
-                student : {
-                    id : student.id
+                company : {
+                    id : company.id
                 }
              }
              jwt.sign(
@@ -95,22 +89,22 @@ router.post(
             let {email,password} = req.body;
             console.log(req.body);
             const errors = validationResult(req);
-            let student = await StudentSchema.findOne({email})
+            let company = await CompanySchema.findOne({email})
 
             if(!errors.isEmpty()){
                 return res.status(401).json({errors : errors.array})
             
             }
-            if(!student){
+            if(!company){
                 return res.status(401).json("Not Found");
             }
 
-            let isPasswordMatch = await bcryptjs.compare(password,student.password);
+            let isPasswordMatch = await bcryptjs.compare(password,company.password);
 
             if(isPasswordMatch === true){
                 const payload = {
-                    student : {
-                        id : student.id
+                    company : {
+                        id : company.id
                     }
                  }
                  jwt.sign(
