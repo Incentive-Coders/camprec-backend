@@ -44,6 +44,9 @@ let CompanySchemas = mongoose.Schema({
     vedio_link : {
         type : String
     },
+    jobs : [{
+        type : mongoose.Schema.ObjectId
+    }],
     premium:{
         type : Boolean,
         required : true

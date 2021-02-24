@@ -12,6 +12,8 @@ app.use("/api/company", require('./routes/company'));
 
 app.use("/api/college", require('./routes/college'));
 
+app.use("/api/jobs", require('./routes/jobs'));
+
 let PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => 

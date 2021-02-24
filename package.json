@@ -2,9 +2,9 @@
   "name": "camprec-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "server.js",
   "scripts": {
-    "test": "npm start server"
+    "test": "npm start server.js"
   },
   "repository": {
     "type": "git",
