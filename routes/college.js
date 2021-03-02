@@ -141,7 +141,6 @@ router.get(
     async (req,res) => {
         console.log("list");
         const data = await CollegeSchema.find({});
-        console.log(data);
         res.send(data);
     }
 );

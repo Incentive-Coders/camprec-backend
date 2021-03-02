@@ -138,7 +138,6 @@ router.get(
     async (req,res) => {
         console.log("list");
         const data = await CompanySchema.find({});
-        console.log(data);
         res.send(data);
     }
 );
