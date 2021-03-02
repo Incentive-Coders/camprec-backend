@@ -5,6 +5,8 @@ const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
 const CollegeSchema = require('../schemas/college');
 const config = require('config');
+var MongoClient = require('mongodb').MongoClient;
+const { rawListeners } = require("../schemas/college");
 
 router.get(
     '/',
@@ -133,5 +135,15 @@ router.post(
        }
     }
 )
+
+router.get(
+    '/list',
+    async (req,res) => {
+        console.log("list");
+        const data = await CollegeSchema.find({});
+        console.log(data);
+        res.send(data);
+    }
+);
 
 module.exports = router;

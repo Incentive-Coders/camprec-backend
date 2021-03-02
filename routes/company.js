@@ -131,6 +131,16 @@ router.post(
             return res.status(500).json({msg : "Server Error..."});
        }
     }
-)
+);
+
+router.get(
+    '/list',
+    async (req,res) => {
+        console.log("list");
+        const data = await CompanySchema.find({});
+        console.log(data);
+        res.send(data);
+    }
+);
 
 module.exports = router;
