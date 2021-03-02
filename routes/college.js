@@ -145,4 +145,12 @@ router.get(
     }
 );
 
+router.get(
+    '/studentlist',
+    async (req,res) => {
+        console.log("studentlist");
+        const data = await CollegeSchema.find({});
+    }
+)
+
 module.exports = router;
