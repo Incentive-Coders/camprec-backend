@@ -7,6 +7,7 @@ const CollegeSchema = require('../schemas/college');
 const StudentSchema = require('../schemas/student');
 const config = require('config');
 const student = require("../schemas/student");
+var speakeasy = require('speakeasy');
 
 router.get(
     '/',
@@ -26,6 +27,7 @@ router.post(
     ],
     async (req,res) => {
         try{
+            
             let {email,password,name,about,college_type,year_of_established,location,website,social_media : {twitter,facebook,linkedin,instagram},vedio_link,student,premium } = req.body;
             let college = await CollegeSchema.findOne({email : email});
             const errors = validationResult(req);

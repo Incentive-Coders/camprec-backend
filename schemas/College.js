@@ -50,6 +50,9 @@ let CollegeSchemas = mongoose.Schema({
     student : [{
         type : mongoose.Schema.ObjectId
     }],
+    secret : {
+        type : String
+    },
     premium:{
         type : Boolean,
         required : true
