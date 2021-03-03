@@ -4,9 +4,9 @@ const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
 const CollegeSchema = require('../schemas/college');
+const StudentSchema = require('../schemas/student');
 const config = require('config');
-var MongoClient = require('mongodb').MongoClient;
-const { rawListeners } = require("../schemas/college");
+const student = require("../schemas/student");
 
 router.get(
     '/',
@@ -135,7 +135,6 @@ router.post(
        }
     }
 )
-
 router.get(
     '/list',
     async (req,res) => {
@@ -144,12 +143,24 @@ router.get(
         res.send(data);
     }
 );
-
-router.get(
+router.post(
     '/studentlist',
+    [
+        check('email','type your email').isEmail(),
+    ],
     async (req,res) => {
-        console.log("studentlist");
-        const data = await CollegeSchema.find({});
+        let {email} = req.body;
+        const data = await CollegeSchema.findOne({email});
+        const len = data.student.length;
+        let data_s = {};
+        for(let i = 0;i<len;i++)
+        {
+            let Obj = data.student[i];
+            data_s[i] = await StudentSchema.findById(Obj,{password : 0});
+
+        }
+        console.log(data_s);
+        res.send(data_s);
     }
 )
 

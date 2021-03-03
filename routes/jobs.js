@@ -20,13 +20,13 @@ router.post(
     ],
     async (req,res) => {
         try{
-            let {job_title,location,job_description,student : [],college : []} = req.body;
+            let {job_title,location,job_description,student,college} = req.body;
             jobs = new JobSchema({
                 job_title,
                 job_description,
                 location,
-                student : [],
-                college : []
+                student,
+                college
              });
              await jobs.save();
 

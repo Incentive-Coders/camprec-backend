@@ -25,10 +25,10 @@ router.post(
     ],
     async (req,res) => {
         try{
-            let {email,password,name,college,cgpa,about,DOB,experience : [{names,description,duration,link}],
-            education : [{course,institute,marks}],
-            certification : [{courses,institutes,valid_till,links}],
-            skills : [],resume,social_media : {twitter,facebook,linkedin,instagram},contactno,premium } = req.body;
+            let {email,password,name,college,cgpa,about,date_of_birth,experience : {names,description,duration,link},
+            education : {course,institute,marks},
+            certification : {courses,institutes,valid_till,links},
+            skills,resume,social_media : {twitter,facebook,linkedin,instagram},contactno,premium } = req.body;
             let student = await StudentSchema.findOne({email : email});
             const errors = validationResult(req);
             if(!errors.isEmpty())
@@ -50,11 +50,11 @@ router.post(
                 college,
                 cgpa,
                 about,
-                DOB,
-                experience : [{names,description,duration,link}],
-                education : [{course,institute,marks}],
-                certification : [{courses,institutes,valid_till,links}],
-                skills : [],
+                date_of_birth,
+                experience : {names,description,duration,link},
+                education : {course,institute,marks},
+                certification : {courses,institutes,valid_till,links},
+                skills,
                 resume,
                 social_media : {twitter,facebook,linkedin,instagram},
                 contactno,

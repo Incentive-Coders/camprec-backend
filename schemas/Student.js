@@ -25,8 +25,8 @@ let StudentSchemas = mongoose.Schema({
     about:{
         type : String
     },
-    DOB:{
-        type : Date
+    date_of_birth:{
+        type : String
     },
     experience : [{
         names : {
