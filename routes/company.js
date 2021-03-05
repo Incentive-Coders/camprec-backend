@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
-const CompanySchema = require('../schemas/company');
+const CompanySchema = require('../schemas/Company');
 const config = require('config');
 
 router.get(
