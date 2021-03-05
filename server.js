@@ -5,15 +5,6 @@ const rateLimit = require("express-rate-limit");
 const xss  = require("xss-clean");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
-const https = require('https');
-const fs = require('fs');
-
-var key = fs.readFileSync(__dirname + '/camprec.key');
-var cert = fs.readFileSync(__dirname + '/camprec.crt');
-var options = {
-  key: key,
-  cert: cert
-};
 
 connectToDatabases();
 
