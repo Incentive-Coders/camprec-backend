@@ -3,10 +3,10 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
-const CollegeSchema = require('../schemas/college');
-const StudentSchema = require('../schemas/student');
+const CollegeSchema = require('../schemas/College');
+const StudentSchema = require('../schemas/Student');
 const config = require('config');
-const student = require("../schemas/student");
+const student = require("../schemas/Student");
 var speakeasy = require('speakeasy');
 
 router.get(
