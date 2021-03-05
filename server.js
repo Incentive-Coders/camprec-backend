@@ -35,8 +35,6 @@ app.use("/api/jobs", require('./routes/jobs'));
 
 let PORT = process.env.PORT || 3000;
 
-var server = https.createServer(options, app);
-
-server.listen(PORT, () => {
-    console.log("server starting on port : " + PORT)
-});
+app.listen(PORT, () => 
+    console.log(`the server is running on the port: ${PORT}`)
+);
