@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
-const StudentSchema = require('../schemas/student');
+const StudentSchema = require('../schemas/Student');
 const Student = require("../schemas/student");
 const config = require('config');
 
