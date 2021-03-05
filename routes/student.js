@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
 const StudentSchema = require('../schemas/Student');
-const Student = require("../schemas/student");
+const Student = require("../schemas/Student");
 const config = require('config');
 
 router.get(
