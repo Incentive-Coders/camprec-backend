@@ -5,6 +5,7 @@ const rateLimit = require("express-rate-limit");
 const xss  = require("xss-clean");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
+var cors = require('cors');
 
 connectToDatabases();
 
@@ -16,6 +17,8 @@ const apiLimiter = rateLimit({
 });
 
 app.use(apiLimiter);//safety against DOS attack
+
+app.use(cors());//to follow cors policy
 
 app.use(xss());//safety against XSS attack or Cross Site Scripting attacks
 
