@@ -6,7 +6,6 @@ const xss  = require("xss-clean");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 var cors = require('cors');
-const bodyParser = require("body-parser");
 
 connectToDatabases();
 
@@ -26,10 +25,6 @@ app.use(xss());//safety against XSS attack or Cross Site Scripting attacks
 app.use(helmet());//safety against XSS attack
 
 app.use(mongoSanitize());//safety against NoSql Injections
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(bodyParser.json());
 
 app.use(express_.json({ extended: false }));
 
