@@ -6,6 +6,7 @@ const xss  = require("xss-clean");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 var cors = require('cors');
+const bodyParser = require("body-parser")
 
 connectToDatabases();
 
@@ -30,6 +31,10 @@ app.use(express_.json({ extended: false }));
 
 app.use(express_.static('.'));
 
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(bodyParser.json())
+
 app.use("/api/student", require('./routes/student'));
 
 app.use("/api/company", require('./routes/company'));
@@ -38,9 +43,9 @@ app.use("/api/college", require('./routes/college'));
 
 app.use("/api/jobs", require('./routes/jobs'));
 
-app.use("/api/checkout",require('./routes/checkout'));
+app.use("/api",require('./routes/checkout'));
 
-let PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => 
     console.log(`the server is running on the port: ${PORT}`)
