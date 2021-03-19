@@ -45,7 +45,7 @@ router.post(
 Router.post(
     "/list" ,
     async (req,res) => {
-        let job = await JobSchema.findById({"id" : {"$in" : req} });
+        let job = await JobSchema.findById({"$in" : req.id});
         res.send(job);
     }
 );
