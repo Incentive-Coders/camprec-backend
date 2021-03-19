@@ -14,7 +14,7 @@ const apiLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 15 minutes
     max: 500,
     message:
-    "Too many accounts created from this IP, please try again after an hour"
+    "Too many accounts created from this IP, please try again after 15 min"
 });
 
 app.use(apiLimiter);//safety against DOS attack
