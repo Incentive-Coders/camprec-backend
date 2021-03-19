@@ -41,7 +41,7 @@ app.use("/api/college", require('./routes/college'));
 
 app.use("/api/jobs", require('./routes/jobs'));
 
-app.use("/api/payment",require('./routes/payment'));
+app.use("/api/checkout",require('./routes/checkout'));
 
 let PORT = process.env.PORT || 3000;
 
