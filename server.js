@@ -6,6 +6,7 @@ const xss  = require("xss-clean");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 var cors = require('cors');
+const bodyParser = require("body-parser");
 
 connectToDatabases();
 
@@ -26,6 +27,10 @@ app.use(helmet());//safety against XSS attack
 
 app.use(mongoSanitize());//safety against NoSql Injections
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+
 app.use(express_.json({ extended: false }));
 
 app.use("/api/student", require('./routes/student'));
@@ -35,6 +40,8 @@ app.use("/api/company", require('./routes/company'));
 app.use("/api/college", require('./routes/college'));
 
 app.use("/api/jobs", require('./routes/jobs'));
+
+app.use("/api/payment",require('./routes/payment'));
 
 let PORT = process.env.PORT || 3000;
 

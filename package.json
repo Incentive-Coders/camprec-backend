@@ -35,6 +35,7 @@
     "nodemon": "^2.0.7",
     "qrcode": "^1.4.4",
     "speakeasy": "^2.0.0",
+    "stripe": "^8.138.0",
     "xss-clean": "^0.1.1",
     "yarn": "^1.22.10"
   }
