@@ -42,7 +42,7 @@ router.post(
     }
 );
 
-Router.post(
+router.post(
     "/list" ,
     async (req,res) => {
         let job = await JobSchema.findById(req.id);
