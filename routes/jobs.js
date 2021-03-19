@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
 const JobSchema = require('../schemas/Jobs');
 const config = require('config');
@@ -35,18 +33,6 @@ router.post(
                     id : jobs.id
                 }
              }
-             jwt.sign(
-                payload,
-                config.get('jwtSecret'),
-                (err,token) =>
-                {
-                    if(err)
-                    {
-                        throw err;
-                    }      
-                    res.json({token});
-                }
-             )
              res.send('true');
         } catch (error){
             console.log(error.message);
