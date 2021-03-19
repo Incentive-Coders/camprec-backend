@@ -28,6 +28,8 @@ app.use(mongoSanitize());//safety against NoSql Injections
 
 app.use(express_.json({ extended: false }));
 
+app.use(express.static('.'));
+
 app.use("/api/student", require('./routes/student'));
 
 app.use("/api/company", require('./routes/company'));
