@@ -1,9 +1,8 @@
 const stripe = require('stripe')('sk_test_51IVziGIyZFM8agXo9ep6CGhRhX23tM7RCwT2axl6JYKXJMlrOCGaZC0s5XymBOVqsdfmIrjh83PGIiz1G67yDZit009GuW6cJY');
-const express = require('express');
-const app = express();
-app.use(express.static('.'));
+const express = require("express");
+const router = express.Router();
 const YOUR_DOMAIN = 'https://camprec.herokuapp.com/api/checkout';
-app.post('/checkout', async (req, res) => {
+router.post('/checkout', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: [
@@ -25,3 +24,5 @@ app.post('/checkout', async (req, res) => {
   });
   res.json({ id: session.id });
 });
+
+module.exports = router;
