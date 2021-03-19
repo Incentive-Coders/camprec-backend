@@ -45,7 +45,10 @@ router.post(
 router.post(
     "/list" ,
     async (req,res) => {
-        let job = await JobSchema.findById(req.id);
+        let job = [];
+        for (i = 0;i<req.body.id.length;i++)
+            job.push(await JobSchema.findById(req.body.id[i]));
+        console.log(job);
         res.send(job);
     }
 );
