@@ -3,6 +3,7 @@ const router = express.Router();
 const { check,validationResult } = require('express-validator');
 const JobSchema = require('../schemas/Jobs');
 const config = require('config');
+const { Router } = require("express");
 
 router.get(
     '/',
@@ -38,6 +39,15 @@ router.post(
             console.log(error.message);
             return res.status(500).json({ msg : "Server Error....."});
         }
+    }
+);
+
+Router.get(
+    "/list" ,
+    async (req,res) => {
+        let job = await JobSchema.find({ "_id": { "$in": req } });
+        jobs = req.map(e => job.find(s => s._id === e));
+        res.send(jobs);
     }
 );
 
