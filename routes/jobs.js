@@ -15,8 +15,8 @@ router.get(
 router.post(
     '/create',
     [
-       // check('job_title','jobtitle is required').not().isEmpty(),
-       // check('job_description','job_description is required').not().isEmpty(),
+        check('job_title','jobtitle is required').not().isEmpty(),
+        check('job_description','job_description is required').not().isEmpty(),
     ],
     async (req,res) => {
         try{
@@ -29,7 +29,7 @@ router.post(
                 college,
                 company_id
              });
-             //await jobs.save();
+             await jobs.save();
 
              const payload = {
                 jobs : {
