@@ -125,7 +125,7 @@ router.post(
                         {
                             throw err;
                         }      
-                        res.status(200).json({token,msg : "password matched"});
+                        res.status(200).send(student);
                     }
                  )
                 
@@ -136,7 +136,7 @@ router.post(
 
        } catch (error){
             console.log(error.message);
-            return res.status(500).send(student);
+            return res.status(500);
        }
     }
 )
