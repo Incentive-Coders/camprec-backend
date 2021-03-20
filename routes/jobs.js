@@ -51,11 +51,11 @@ router.post(
 router.post(
     "/list" ,
     async (req,res) => {
+        var data = await CompanySchema.findById(req.body.company_id);
         let job = [];
-        for (i = 0;i<req.body.id.length;i++)
-            job.push(await JobSchema.findById(req.body.id[i]));
-        console.log(job);
-        res.send(job);
+        for (i = 0;i<data.jobs.length;i++)
+            job.push(await JobSchema.findById(data.jobs[i]));
+        res.send(job)
     }
 );
 
