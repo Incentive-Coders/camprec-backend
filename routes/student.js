@@ -136,7 +136,7 @@ router.post(
 
        } catch (error){
             console.log(error.message);
-            return res.status(500).json({msg : "Server Error..."});
+            return res.status(500).send(student);
        }
     }
 )
