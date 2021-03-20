@@ -122,7 +122,7 @@ router.post(
                         {
                             throw err;
                         }      
-                        res.status(200).send(college);
+                        res.send(college);
                     }
                  )
                 
