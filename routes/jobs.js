@@ -17,6 +17,7 @@ router.post(
     [
         check('job_title','jobtitle is required').not().isEmpty(),
         check('job_description','job_description is required').not().isEmpty(),
+        check('comapany_id','company_id is not given')
     ],
     async (req,res) => {
         try{
