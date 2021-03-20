@@ -3,7 +3,8 @@ const router = express.Router();
 const { check,validationResult } = require('express-validator');
 const JobSchema = require('../schemas/Jobs');
 const config = require('config');
-const { Router } = require("express");
+const CompanySchema = require('../schemas/Company');
+const Jobs = require("../schemas/Jobs");
 
 router.get(
     '/',
@@ -14,26 +15,31 @@ router.get(
 router.post(
     '/create',
     [
-        check('job_title','jobtitle is required').not().isEmpty(),
-        check('job_description','job_description is required').not().isEmpty(),
+       // check('job_title','jobtitle is required').not().isEmpty(),
+       // check('job_description','job_description is required').not().isEmpty(),
     ],
     async (req,res) => {
         try{
-            let {job_title,location,job_description,student,college} = req.body;
+            let {job_title,location,job_description,student,college,company_id} = req.body;
             jobs = new JobSchema({
                 job_title,
                 job_description,
                 location,
                 student,
-                college
+                college,
+                company_id
              });
-             await jobs.save();
+             //await jobs.save();
 
              const payload = {
                 jobs : {
                     id : jobs.id
                 }
              }
+             console.log(jobs.id);
+             console.log(company_id);
+             var data = await CompanySchema.findByIdAndUpdate(company_id,{$push : { "jobs" : jobs.id}});
+             console.log(data);
              res.send('true');
         } catch (error){
             console.log(error.message);

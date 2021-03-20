@@ -116,8 +116,9 @@ router.post(
                         if(err)
                         {
                             throw err;
-                        }      
-                        res.status(200).json({token,msg : "password matched"});
+                        } 
+                        console.log(company);     
+                        res.status(200).json(company);
                     }
                  )
                 
