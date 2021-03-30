@@ -73,6 +73,8 @@ router.post(
         res.send('true');
     }
 );
+
+
 router.post(
     "/caccept",
     async (req,res) => {
@@ -83,6 +85,32 @@ router.post(
         }
         var data = await JobSchema.findByIdAndUpdate(job_id,{$push : { "college" : college_id}});
         res.send('true');
+    }
+);
+
+router.post(
+    '/edit',
+    [
+        check('job_title','jobtitle is required').not().isEmpty(),
+        check('job_description','job_description is required').not().isEmpty(),
+        check('comapany_id','company_id is not given')
+    ],
+    async (req,res) => {
+        try{
+            let {job_id,job_title,location,job_description} = req.body;
+            jobs = new JobSchema({
+                job_id,
+                job_title,
+                job_description,
+                location,
+            });
+             var data = await JobSchema.findByIdAndUpdate(job_id,{ "job_title" : job_title,"job_description" : job_description,"location" : location});
+             console.log(data);
+             res.send('true');
+        } catch (error){
+            console.log(error.message);
+            return res.status(500).json({ msg : "Server Error....."});
+        }
     }
 );
 module.exports = router;
