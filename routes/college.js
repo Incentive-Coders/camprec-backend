@@ -154,7 +154,7 @@ router.post(
         let {email} = req.body;
         const data = await CollegeSchema.findOne({email});
         const len = data.student.length;
-        let data_s = {};
+        let data_s = [];
         for(let i = 0;i<len;i++)
         {
             let Obj = data.student[i];
