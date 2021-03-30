@@ -61,4 +61,28 @@ router.post(
     }
 );
 
+router.post(
+    "/saccept",
+    async (req,res) => {
+        let {job_id,student_id} = req.body;
+        let student = await JobSchema.findOne({"student":student_id});
+        if(student){
+            return res.status(401).json("Already Applied");
+        }
+        var data = await JobSchema.findByIdAndUpdate(job_id,{$push : { "student" : student_id}});
+        res.send('true');
+    }
+);
+router.post(
+    "/caccept",
+    async (req,res) => {
+        let {job_id,college_id} = req.body;
+        let college = await JobSchema.findOne({"college":college_id});
+        if(college){
+            return res.status(401).json("Already Applied");
+        }
+        var data = await JobSchema.findByIdAndUpdate(job_id,{$push : { "college" : college_id}});
+        res.send('true');
+    }
+);
 module.exports = router;

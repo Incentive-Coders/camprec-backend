@@ -96,6 +96,9 @@ let StudentSchemas = mongoose.Schema({
     contactno : {
         type : String
     },
+    job: [{
+        type : mongoose.Schema.ObjectId
+    }],
     premium:{
         type : Boolean,
         required : true
