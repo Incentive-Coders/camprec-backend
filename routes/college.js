@@ -158,7 +158,7 @@ router.post(
         for(let i = 0;i<len;i++)
         {
             let Obj = data.student[i];
-            data_s[i] = await StudentSchema.findById(Obj,{password : 0});
+            data_s.push(await StudentSchema.findById(Obj,{password : 0}));
 
         }
         console.log(data_s);
