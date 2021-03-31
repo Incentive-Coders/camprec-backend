@@ -143,4 +143,14 @@ router.get(
     }
 );
 
+
+router.post(
+    '/edit',
+    async(req,res) => {
+        console.log(req.body);
+        let {company_id,name,about,location,website,social_media : {twitter,facebook,linkedin,instagram},vedio_link} = req.body;
+        var data = await CompanySchema.findByIdAndUpdate(company_id,{ "name" : name,"about" : about,"location": location,"website" : website, social_media : {"twitter" : twitter,"facebook" : facebook,"linkedin" : linkedin,"instagram" : instagram},"vedio_link" : vedio_link });
+        res.send("true");
+    }
+)
 module.exports = router;
