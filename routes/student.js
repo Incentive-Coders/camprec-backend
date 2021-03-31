@@ -139,6 +139,26 @@ router.post(
             return res.status(500);
        }
     }
-)
+);
+
+router.post(
+    '/edit',
+    async(req,res) => {
+        let {name,about,date_of_birth,experience : {names,description,duration,link},
+            education : {course,institute,marks},
+            certification : {courses,institutes,valid_till,links},
+            skills,resume,social_media : {twitter,facebook,linkedin,instagram},contactno} = req.body;
+            var data = await CollegeSchema.findByIdAndUpdate(
+                student_id,{ "name" : name,"about" : about,"date_of_birth": date_of_birth,
+                experience : {"names" : names,"description" : description,"duration" : duration,"link" : link},
+                experience : {"course" : course,"institute" : institute,"marks" : marks},
+                "skills" : skills, "resume" : resume,
+                certification : {"courses" : courses,"institutes" : institutes,"valid_till" : valid_till,"links" : links},
+                "website" : website, social_media : {"twitter" : twitter,"facebook" : facebook,"linkedin" : linkedin,"instagram" : instagram},
+                "vedio_link" : vedio_link});
+            console.log(data);
+            res.send("true");
+    }
+);
 
 module.exports = router;
