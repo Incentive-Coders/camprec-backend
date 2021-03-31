@@ -5,7 +5,6 @@ const JobSchema = require('../schemas/Jobs');
 const config = require('config');
 const CompanySchema = require('../schemas/Company');
 const Jobs = require("../schemas/Jobs");
-const { response } = require("express");
 
 router.get(
     '/',
@@ -105,8 +104,8 @@ router.post(
                 job_description,
                 location,
             });
-            var response = await JobSchema.findById(job_id);
-            if(response == null)
+            var responss = await JobSchema.findById(job_id);
+            if(responss == null)
             {
                 res.send("the job is not present");
             }
