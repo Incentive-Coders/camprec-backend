@@ -17,14 +17,6 @@ router.get(
 
 router.post(
     '/signup',
-    [
-        check('email','E-mail is required').isEmail(),
-        check('password','Password is required').not().isEmpty(),
-        check('name','name is required').not().isEmpty(),
-        check('premium','premium is required').not().isEmpty(),
-        check('location','location is required').not().isEmpty(),
-        check('year_of_established','year_of_established is required').not().isEmpty(),
-    ],
     async (req,res) => {
         try{
             
