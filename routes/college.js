@@ -172,7 +172,8 @@ router.post(
         let {college_id,name,about,location,website,social_media : {twitter,facebook,linkedin,instagram},vedio_link} = req.body;
         var data = await CollegeSchema.findByIdAndUpdate(college_id,{ "name" : name,"about" : about,"location": location,"website" : website, social_media : {"twitter" : twitter,"facebook" : facebook,"linkedin" : linkedin,"instagram" : instagram},"vedio_link" : vedio_link});
         console.log(data);
-        res.send("true");
+        var data2 = await CollegeSchema.findById(college_id)
+        res.send(data2);
     }
 );
 
