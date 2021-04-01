@@ -4,6 +4,8 @@ const { check,validationResult } = require('express-validator');
 const JobSchema = require('../schemas/Jobs');
 const config = require('config');
 const CompanySchema = require('../schemas/Company');
+const StudentSchema = require('../schemas/Student');
+const CollegeSchema = require('../schemas/College');
 const Jobs = require("../schemas/Jobs");
 
 router.get(
@@ -118,4 +120,40 @@ router.post(
         }
     }
 );
+
+router.post(
+    '/clist',
+    async (req,res) => {
+        let {job_id} = req.body;
+        var data = await JobSchema.findById(job_id);
+        const len = data.college.length;
+        let data_s = [];
+        for(let i = 0;i<len;i++)
+        {
+            let Obj = data.college[i];
+            data_s.push(await CollegeSchema.findById(Obj,{password : 0}));
+        }
+        console.log(data_s);
+        res.send(data_s);
+    }
+);
+
+router.post(
+    '/slist',
+    async (req,res) => {
+        let {job_id} = req.body;
+        var data = await JobSchema.findById(job_id);
+        const len = data.student.length;
+        let data_s = [];
+        for(let i = 0;i<len;i++)
+        {
+            let Obj = data.student[i];
+            data_s.push(await StudentSchema.findById(Obj,{password : 0}));
+        }
+        console.log(data_s);
+        res.send(data_s);
+    }
+);
+
+
 module.exports = router;
