@@ -47,9 +47,7 @@ router.post(
                 year_of_established,
                 location,
                 website,
-                social_media : {twitter,facebook,linkedin,instagram},
                 vedio_link,
-                jobs,
                 premium
              });
              await company.save();
