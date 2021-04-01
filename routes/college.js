@@ -176,4 +176,13 @@ router.post(
     }
 );
 
+router.post(
+    '/data',
+    async (req,res) => {
+        let {college_id} = req.body;
+        var data = await CollegeSchema.findById(college_id,{password : 0});
+        res.send(data);
+    }
+);
+
 module.exports = router;

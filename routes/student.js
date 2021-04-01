@@ -161,4 +161,13 @@ router.post(
     }
 );
 
+router.post(
+    '/data',
+    async (req,res) => {
+        let {student_id} = req.body;
+        var data = await StudentSchema.findById(student_id,{password : 0});
+        res.send(data);
+    }
+);
+
 module.exports = router;
