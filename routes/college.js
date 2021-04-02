@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
-const { check,validationResult } = require('express-validator');
+const { check,validationResult, query } = require('express-validator');
 const CollegeSchema = require('../schemas/College');
 const StudentSchema = require('../schemas/Student');
 const config = require('config');
@@ -126,15 +126,19 @@ router.post(
             return res.status(500).json({msg : "Server Error..."});
        }
     }
-)
+);
+
 router.get(
-    '/list',
+    '/list/:page',
     async (req,res) => {
+        var page = req.params.page;
         console.log("list");
-        const data = await CollegeSchema.find({});
+        page = (page - 1) * 10;
+        const data = await CollegeSchema.find({},{password : 0},{skip : page, limit : 1});
         res.send(data);
     }
 );
+
 router.post(
     '/studentlist',
     [
