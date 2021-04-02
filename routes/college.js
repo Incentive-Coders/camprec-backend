@@ -20,7 +20,7 @@ router.post(
     async (req,res) => {
         try{
             
-            let {email,password,name,about,year_of_established,location,website,social_media : {twitter = " ",facebook = " ",linkedin = " ",instagram = " "},jobs = " ",vedio_link,premium = false} = req.body;
+            let {email,password,name,about,year_of_established,location,website,social_media : {twitter,facebook,linkedin,instagram},vedio_link} = req.body;
             let college = await CollegeSchema.findOne({email : email});
             const errors = validationResult(req);
             if(!errors.isEmpty())
@@ -47,7 +47,7 @@ router.post(
                 social_media : {twitter,facebook,linkedin,instagram},
                 vedio_link,
                 student,
-                premium
+                premium = false
              });
              await college.save();
 
