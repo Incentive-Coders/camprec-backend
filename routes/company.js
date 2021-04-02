@@ -16,7 +16,7 @@ router.post(
     '/signup',
     async (req,res) => {
         try{
-            let {email,password,name,about,year_of_established,location,website,social_media : {twitter,facebook,linkedin,instagram},jobs,vedio_link} = req.body;
+            let {email,password,name,about,year_of_established,location,website,social_media : {twitter,facebook,linkedin,instagram},vedio_link} = req.body;
             let company = await CompanySchema.findOne({email : email});
             const errors = validationResult(req);
             if(!errors.isEmpty())
@@ -40,8 +40,7 @@ router.post(
                 location,
                 website,
                 vedio_link,
-                social_media : {twitter,facebook,linkedin,instagram},
-                jobs
+                social_media : {twitter,facebook,linkedin,instagram}
              });
              await company.save();
 
