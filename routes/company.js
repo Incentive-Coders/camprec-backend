@@ -125,10 +125,12 @@ router.post(
 );
 
 router.get(
-    '/list',
+    '/list/:page',
     async (req,res) => {
+        var page = req.params.page;
         console.log("list");
-        const data = await CompanySchema.find({});
+        page = (page - 1) * 10;
+        const data = await CompanySchema.find({},{password : 0},{skip: page, limit: 10});
         res.send(data);
     }
 );
