@@ -176,4 +176,13 @@ router.post(
     }
 );
 
+router.post(
+    '/delete',
+    async (req,res) => {
+        let {name} = req.body;
+        var data = await CollegeSchema.findOneAndDelete({name});
+        res.send(data);
+    }
+);
+
 module.exports = router;

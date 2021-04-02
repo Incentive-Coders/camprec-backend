@@ -144,5 +144,14 @@ router.post(
         var data2 = await CompanySchema.findById(company_id)
         res.send(data2);
     }
-)
+);
+
+router.post(
+    '/delete',
+    async (req,res) => {
+        let {name} = req.body;
+        var data = await CompanySchema.findOneAndDelete({name});
+        res.send(data);
+    }
+);
 module.exports = router;

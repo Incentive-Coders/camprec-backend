@@ -155,5 +155,14 @@ router.post(
     }
 );
 
+router.post(
+    '/delete',
+    async (req,res) => {
+        let {name} = req.body;
+        var data = await JobSchema.findOneAndDelete({name});
+        res.send(data);
+    }
+);
+
 
 module.exports = router;

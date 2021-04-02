@@ -170,4 +170,13 @@ router.post(
     }
 );
 
+router.post(
+    '/delete',
+    async (req,res) => {
+        let {name} = req.body;
+        var data = await StudentSchema.findOneAndDelete({name});
+        res.send(data);
+    }
+);
+
 module.exports = router;
