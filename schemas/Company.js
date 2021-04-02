@@ -47,10 +47,6 @@ let CompanySchemas = mongoose.Schema({
     jobs : [{
         type : mongoose.Schema.ObjectId
     }],
-    premium:{
-        type : Boolean,
-        required : true
-    }
 });
 
 module.exports = CompanySchemas = mongoose.model('company',CompanySchemas);
