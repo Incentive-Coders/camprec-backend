@@ -6,6 +6,7 @@ const { check,validationResult } = require('express-validator');
 const StudentSchema = require('../schemas/Student');
 const Student = require("../schemas/Student");
 const config = require('config');
+const CollegeSchema = require("../schemas/College");
 
 router.get(
     '/',
@@ -78,7 +79,10 @@ router.post(
                     }      
                     res.json({token});
                 }
-             )
+             );
+             var id =  await CollegeSchema.findOne({name : college});
+             var data = await CollegeSchema.findByIdAndUpdate(id.id,{$push : { "student" : student.id}});
+             console.log(data);
              res.send('true');
         } catch (error){
             console.log(error.message);
@@ -153,6 +157,7 @@ router.post(
                 experience : {"names" : names,"description" : description,"duration" : duration,"link" : link},
                 experience : {"course" : course,"institute" : institute,"marks" : marks},
                 "skills" : skills, "resume" : resume,
+                "contactno": contactno,
                 certification : {"courses" : courses,"institutes" : institutes,"valid_till" : valid_till,"links" : links},
                 "website" : website, social_media : {"twitter" : twitter,"facebook" : facebook,"linkedin" : linkedin,"instagram" : instagram},
                 "vedio_link" : vedio_link});
