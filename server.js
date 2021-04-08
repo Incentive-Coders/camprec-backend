@@ -43,6 +43,8 @@ app.use("/api/college", require('./routes/college'));
 
 app.use("/api/jobs", require('./routes/jobs'));
 
+app.use("/api/admin", require('./routes/admin'));
+
 let PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => 
