@@ -147,6 +147,14 @@ router.post(
         res.send(data2);
     }
 );
+router.post(
+    '/data',
+    async (req,res) => {
+        let {company_id} = req.body;
+        var data = await CompanySchema.findById(company_id,{password : 0});
+        res.send(data);
+    }
+);
 
 router.post(
     '/delete',
