@@ -47,6 +47,9 @@ let CompanySchemas = mongoose.Schema({
     jobs : [{
         type : mongoose.Schema.ObjectId
     }],
+    approve : {
+        type : Boolean
+    }
 });
 
 module.exports = CompanySchemas = mongoose.model('company',CompanySchemas);

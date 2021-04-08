@@ -29,7 +29,7 @@ router.post(
             let {email,password,name,college,cgpa,about,date_of_birth,experience : {names,description,duration,link},
             education : {course,institute,marks},
             certification : {courses,institutes,valid_till,links},
-            skills,resume,social_media : {twitter,facebook,linkedin,instagram},contactno,premium } = req.body;
+            skills,resume,social_media : {twitter,facebook,linkedin,instagram},contactno,premium,approve } = req.body;
             let student = await StudentSchema.findOne({email : email});
             const errors = validationResult(req);
             if(!errors.isEmpty())
@@ -60,6 +60,7 @@ router.post(
                 social_media : {twitter,facebook,linkedin,instagram},
                 contactno,
                 premium,
+                approve
              });
              await student.save();
 

@@ -15,7 +15,7 @@ let JobSchemas = mongoose.Schema({
     }],
     student : [{
         type : mongoose.Schema.ObjectId
-    }]
+    }],
 });
 
 module.exports = JobSchemas = mongoose.model('jobs',JobSchemas);

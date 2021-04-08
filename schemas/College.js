@@ -50,6 +50,9 @@ let CollegeSchemas = mongoose.Schema({
     student : [{
         type : mongoose.Schema.ObjectId
     }],
+    approve : {
+        type : Boolean
+    }
 });
 
 module.exports = CollegeSchemas = mongoose.model('college',CollegeSchemas);

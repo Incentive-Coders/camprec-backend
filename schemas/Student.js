@@ -102,6 +102,9 @@ let StudentSchemas = mongoose.Schema({
     premium:{
         type : Boolean,
         required : true
+    },
+    approve : {
+        type : Boolean
     }
 });
 
