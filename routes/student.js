@@ -26,10 +26,10 @@ router.post(
     ],
     async (req,res) => {
         try{
-            let {email,password,name,college,cgpa,about,date_of_birth,experience : {names,description,duration,link},
-            education : {course,institute,marks},
-            certification : {courses,institutes,valid_till,links},
-            skills,resume,social_media : {twitter,facebook,linkedin,instagram},contactno,premium,approve } = req.body;
+            let {email,password,name,college,cgpa,about,date_of_birth,experience : [{names,description,duration,link}],
+            education : [{course,institute,marks}],
+            certification : [{courses,institutes,valid_till,links}],
+            skills:[],resume,social_media : {twitter,facebook,linkedin,instagram},contactno,premium,approve } = req.body;
             let student = await StudentSchema.findOne({email : email});
             const errors = validationResult(req);
             if(!errors.isEmpty())
@@ -52,10 +52,10 @@ router.post(
                 cgpa,
                 about,
                 date_of_birth,
-                experience : {names,description,duration,link},
-                education : {course,institute,marks},
-                certification : {courses,institutes,valid_till,links},
-                skills,
+                experience : [{names,description,duration,link}],
+                education : [{course,institute,marks}],
+                certification : [{courses,institutes,valid_till,links}],
+                skills:[],
                 resume,
                 social_media : {twitter,facebook,linkedin,instagram},
                 contactno,
@@ -149,10 +149,10 @@ router.post(
 router.post(
     '/edit',
     async(req,res) => {
-        let {name,about,date_of_birth,experience : {names,description,duration,link},
-            education : {course,institute,marks},
-            certification : {courses,institutes,valid_till,links},
-            skills,resume,social_media : {twitter,facebook,linkedin,instagram},contactno} = req.body;
+        let {name,about,date_of_birth,experience : [{names,description,duration,link}],
+            education : [{course,institute,marks}],
+            certification : [{courses,institutes,valid_till,links}],
+            skills : [],resume,social_media : {twitter,facebook,linkedin,instagram},contactno} = req.body;
             var data = await CollegeSchema.findByIdAndUpdate(
                 student_id,{ "name" : name,"about" : about,"date_of_birth": date_of_birth,
                 experience : {"names" : names,"description" : description,"duration" : duration,"link" : link},
