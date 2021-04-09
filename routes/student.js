@@ -26,7 +26,7 @@ router.post(
     ],
     async (req,res) => {
         try{
-            let {email,password,name,college,cgpa,about,date_of_birth,experience : [{names,description,duration,link}],
+            let {email,password,name,college,cgpa,about,date_of_birth,experience : [{names,description,duration,company,link}],
             education : [{course,institute,marks}],
             certification : [{courses,institutes,valid_till,links}],
             skills:[],resume,social_media : {twitter,facebook,linkedin,instagram},contactno,premium,approve } = req.body;
@@ -52,7 +52,7 @@ router.post(
                 cgpa,
                 about,
                 date_of_birth,
-                experience : [{names,description,duration,link}],
+                experience : [{names,description,duration,company,link}],
                 education : [{course,institute,marks}],
                 certification : [{courses,institutes,valid_till,links}],
                 skills:[],
