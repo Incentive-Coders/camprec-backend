@@ -203,13 +203,48 @@ router.post(
         res.send(data);
     }
 );
-
 router.post(
     '/addskill',
     async (req,res) => {
         let {student_id,skill} = req.body;
-        var data = await StudentSchema.findByIdAndUpdate(student_id,{$push: {skill : skill}});
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$push: {"skills" : skill}});
         res.send(data);
     }
 )
+
+router.post(
+    '/delskill',
+    async (req,res) => {
+        let {student_id,skill} = req.body;
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$pull: {"skills" : skill}});
+        res.send(data);
+    }
+);
+
+router.post(
+    '/delexp',
+    async (req,res) => {
+        let {student_id,names,companys} = req.body;
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$pull: {experience : {names : names,companys : companys}}});
+        res.send(data);
+    }
+);
+
+router.post(
+    '/deledu',
+    async (req,res) => {
+        let {student_id,course,institute} = req.body;
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$pull: {education : {course : course,institute : institute}}});
+        res.send(data);
+    }
+);
+router.post(
+    '/delcer',
+    async (req,res) => {
+        let {courses,institutes,student_id} = req.body;
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$pull: {certification : {courses : courses, institutes : institutes}}});
+        res.send(data);
+    }
+);
+
 module.exports = router;
