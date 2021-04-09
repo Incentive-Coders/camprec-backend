@@ -26,7 +26,7 @@ router.post(
     ],
     async (req,res) => {
         try{
-            let {email,password,name,college,cgpa,about,date_of_birth,experience : [{names,description,duration,company,link}],
+            let {email,password,name,college,cgpa,about,date_of_birth,experience : [{names,description,duration,companys,link}],
             education : [{course,institute,marks}],
             certification : [{courses,institutes,valid_till,links}],
             skills:[],resume,social_media : {twitter,facebook,linkedin,instagram},contactno,premium,approve } = req.body;
@@ -52,7 +52,7 @@ router.post(
                 cgpa,
                 about,
                 date_of_birth,
-                experience : [{names,description,duration,company,link}],
+                experience : [{names,description,duration,companys,link}],
                 education : [{course,institute,marks}],
                 certification : [{courses,institutes,valid_till,links}],
                 skills:[],
@@ -149,17 +149,9 @@ router.post(
 router.post(
     '/edit',
     async(req,res) => {
-        let {name,about,date_of_birth,experience : [{names,description,duration,link}],
-            education : [{course,institute,marks}],
-            certification : [{courses,institutes,valid_till,links}],
-            skills : [],resume,social_media : {twitter,facebook,linkedin,instagram},contactno} = req.body;
-            var data = await CollegeSchema.findByIdAndUpdate(
-                student_id,{ "name" : name,"about" : about,"date_of_birth": date_of_birth,
-                experience : {"names" : names,"description" : description,"duration" : duration,"link" : link},
-                experience : {"course" : course,"institute" : institute,"marks" : marks},
-                "skills" : skills, "resume" : resume,
-                "contactno": contactno,
-                certification : {"courses" : courses,"institutes" : institutes,"valid_till" : valid_till,"links" : links},
+        let {name,about,date_of_birth,resume,social_media : {twitter,facebook,linkedin,instagram},contactno} = req.body;
+            var data = await StudentSchema.findByIdAndUpdate(
+                student_id,{ "name" : name,"about" : about,"date_of_birth": date_of_birth, "resume" : resume,"contactno": contactno,
                 "website" : website, social_media : {"twitter" : twitter,"facebook" : facebook,"linkedin" : linkedin,"instagram" : instagram},
                 "vedio_link" : vedio_link});
             console.log(data);
@@ -185,4 +177,39 @@ router.post(
     }
 );
 
+router.post(
+    '/addexp',
+    async (req,res) => {
+        let {student_id,names,description,duration,link,companys} = req.body;
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$push: {experience : {names : names, description : description, duration : duration,link : link,companys : companys}}});
+        res.send(data);
+    }
+);
+
+router.post(
+    '/addedu',
+    async (req,res) => {
+        let {student_id,course,institute,marks} = req.body;
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$push: {experience : {course : course,institute : institute,marks : marks}}});
+        res.send(data);
+    }
+);
+
+router.post(
+    '/addcer',
+    async (req,res) => {
+        let {courses,institutes,valid_till,links,student_id} = req.body;
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$push: {certification : {courses : courses, institutes : institutes, valid_till : valid_till,links : links}}});
+        res.send(data);
+    }
+);
+
+router.post(
+    '/addskill',
+    async (req,res) => {
+        let {student_id,skill} = req.body;
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$push: {skill : skill}});
+        res.send(data);
+    }
+)
 module.exports = router;
