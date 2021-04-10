@@ -190,7 +190,7 @@ router.post(
     '/addedu',
     async (req,res) => {
         let {student_id,course,institute,marks} = req.body;
-        var data = await StudentSchema.findByIdAndUpdate(student_id,{$push: {experience : {course : course,institute : institute,marks : marks}}});
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$push: {education : {course : course,institute : institute,marks : marks}}});
         res.send(data);
     }
 );
