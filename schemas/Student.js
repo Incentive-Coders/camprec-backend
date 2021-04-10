@@ -64,7 +64,7 @@ let StudentSchemas = mongoose.Schema({
             type : String
         },
         valid_till : {
-            type : Date
+            type : String
         },
         links : {
             type : String 
