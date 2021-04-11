@@ -190,4 +190,17 @@ router.post(
     }
 );
 
+router.post(
+    "/jaccept",
+    async (req,res) => {
+        let {job_id,college_id} = req.body;
+        let college = await CollegeSchema.findOne(college_id,{$find : {"job" : job_id}});
+        if(student){
+            return res.status(401).json("Already Applied");
+        }
+        var data = await CollegeSchema.findByIdAndUpdate(college_id,{$push : { "job" : job_id}});
+        res.send(data);
+    }
+);
+
 module.exports = router;

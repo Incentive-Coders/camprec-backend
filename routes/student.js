@@ -248,10 +248,10 @@ router.post(
 );
 
 router.post(
-    "/caccept",
+    "/jaccept",
     async (req,res) => {
         let {job_id,student_id} = req.body;
-        let student = await StudentSchema.findOne({"job":job_id});
+        let student = await StudentSchema.findOne(student_id,{$find : {"job" : job_id}});
         if(student){
             return res.status(401).json("Already Applied");
         }

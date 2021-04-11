@@ -67,7 +67,7 @@ router.post(
     "/saccept",
     async (req,res) => {
         let {job_id,student_id} = req.body;
-        let student = await JobSchema.findOne({"student":student_id});
+        let student = await JobSchema.findOne(job_id, {$find : {"student" : student_id}});
         if(student){
             return res.status(401).json("Already Applied");
         }
@@ -81,7 +81,7 @@ router.post(
     "/caccept",
     async (req,res) => {
         let {job_id,college_id} = req.body;
-        let college = await JobSchema.findOne({"college":college_id});
+        let college = await JobSchema.findOne(job_id,{$find : {"college" : college_id}});
         if(college){
             return res.status(401).json("Already Applied");
         }
