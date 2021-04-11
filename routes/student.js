@@ -260,4 +260,15 @@ router.post(
     }
 );
 
+router.get(
+    '/list/:page',
+    async (req,res) => {
+        var page = req.params.page;
+        console.log("list");
+        page = (page - 1) * 10;
+        const data = await StudentSchema.find({},{password : 0},{skip: page, limit: 10});
+        res.send(data);
+    }
+);
+
 module.exports = router;
