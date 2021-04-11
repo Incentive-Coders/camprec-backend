@@ -247,4 +247,17 @@ router.post(
     }
 );
 
+router.post(
+    "/caccept",
+    async (req,res) => {
+        let {job_id,student_id} = req.body;
+        let student = await StudentSchema.findOne({"job":job_id});
+        if(student){
+            return res.status(401).json("Already Applied");
+        }
+        var data = await StudentSchema.findByIdAndUpdate(student_id,{$push : { "job" : job_id}});
+        res.send(data);
+    }
+);
+
 module.exports = router;

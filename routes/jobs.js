@@ -72,7 +72,7 @@ router.post(
             return res.status(401).json("Already Applied");
         }
         var data = await JobSchema.findByIdAndUpdate(job_id,{$push : { "student" : student_id}});
-        res.send('true');
+        res.send(data);
     }
 );
 
@@ -86,7 +86,7 @@ router.post(
             return res.status(401).json("Already Applied");
         }
         var data = await JobSchema.findByIdAndUpdate(job_id,{$push : { "college" : college_id}});
-        res.send('true');
+        res.send(data);
     }
 );
 
