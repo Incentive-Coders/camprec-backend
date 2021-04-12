@@ -86,12 +86,17 @@ router.post(
     "/caccept",
     async (req,res) => {
         let {job_id,college_id} = req.body;
-        let college = await JobSchema.findOne(job_id,{$find : {"college" : college_id}});
-        if(college){
-            return res.status(401).json("Already Applied");
+        let college = await JobSchema.findById(job_id);
+        let data = college.college;
+        for(i = 0;i<data.length;i++)
+        {
+            if(data[i] == college_id)
+            {
+                return res.send("Already Applied");
+            }
         }
-        var data = await JobSchema.findByIdAndUpdate(job_id,{$push : { "college" : college_id}});
-        res.send(data);
+        var datas = await JobSchema.findByIdAndUpdate(job_id,{$push : { "college" : college_id}});
+        res.send(datas);
     }
 );
 
