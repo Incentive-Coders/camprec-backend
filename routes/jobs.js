@@ -66,12 +66,18 @@ router.post(
     "/saccept",
     async (req,res) => {
         let {job_id,student_id} = req.body;
-        let student = await JobSchema.find(job_id, {$in : {"student" : student_id}});
-        if(student){
-            return res.status(401).json("Already Applied");
+        let student = await JobSchema.findById(job_id);
+        let data = student.student;
+        console.log(data.length)
+        for(i = 0;i<data.length;i++)
+        {
+            if(data[i] == student_id)
+            {
+                return res.send("Already Applied");
+            }
         }
-        var data = await JobSchema.findByIdAndUpdate(job_id,{$push : { "student" : student_id}});
-        res.send(data);
+        var datas = await JobSchema.findByIdAndUpdate(job_id,{$push : { "student" : student_id}});
+        res.send(datas);
     }
 );
 
