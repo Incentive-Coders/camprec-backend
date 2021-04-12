@@ -6,7 +6,6 @@ const config = require('config');
 const CompanySchema = require('../schemas/Company');
 const StudentSchema = require('../schemas/Student');
 const CollegeSchema = require('../schemas/College');
-const Jobs = require("../schemas/Jobs");
 
 router.get(
     '/',
@@ -67,7 +66,7 @@ router.post(
     "/saccept",
     async (req,res) => {
         let {job_id,student_id} = req.body;
-        let student = await JobSchema.findOne(job_id, {$find : {"student" : student_id}});
+        let student = await JobSchema.find(job_id, {$in : {"student" : student_id}});
         if(student){
             return res.status(401).json("Already Applied");
         }

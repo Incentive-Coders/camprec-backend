@@ -172,7 +172,7 @@ router.get(
         var page = req.params.page;
         console.log("list");
         page = (page - 1) * 10;
-        const data = await CompanySchema.find({},{password : 0},{skip: page, limit: 10});
+        const data = await CompanySchema.find({approve : false},{password : 0},{skip: page, limit: 10});
         res.send(data);
     }
 );
