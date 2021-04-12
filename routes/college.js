@@ -135,7 +135,7 @@ router.get(
         var page = req.params.page;
         console.log("list");
         page = (page - 1) * 10;
-        const data = await CollegeSchema.find({},{password : 0},{skip : page, limit : 10});
+        const data = await CollegeSchema.find({},{password : 0},{skip : page, limit : 8});
         res.send(data);
     }
 );
