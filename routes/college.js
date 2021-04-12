@@ -140,6 +140,17 @@ router.get(
     }
 );
 
+router.get(
+    '/approvec/:page',
+    async (req,res) => {
+        var page = req.params.page;
+        console.log("list");
+        page = (page - 1) * 10;
+        const data = await CollegeSchema.find({},{password : 0},{skip : page, limit : 10});
+        res.send(data);
+    }
+);
+
 router.post(
     '/studentlist',
     [

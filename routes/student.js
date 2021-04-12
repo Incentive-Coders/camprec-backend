@@ -271,4 +271,15 @@ router.get(
     }
 );
 
+router.get(
+    '/approves/:page',
+    async (req,res) => {
+        var page = req.params.page;
+        console.log("list");
+        page = (page - 1) * 10;
+        const data = await StudentSchema.find({approve : false},{password : 0},{skip: page, limit: 10});
+        res.send(data);
+    }
+);
+
 module.exports = router;
