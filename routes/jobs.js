@@ -168,8 +168,8 @@ router.post(
 router.post(
     '/delete',
     async (req,res) => {
-        let {name} = req.body;
-        var data = await JobSchema.findOneAndDelete({name});
+        let {job_id} = req.body;
+        var data = await JobSchema.findByIdAndDelete(job_id);
         res.send(data);
     }
 );
