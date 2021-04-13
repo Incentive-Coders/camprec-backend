@@ -132,6 +132,7 @@ router.get(
         console.log("list");
         page = (page - 1) * 8;
         const data = await CompanySchema.find({},{password : 0},{skip: page, limit: 8});
+        console.log(data);
         res.send(data);
     }
 );
