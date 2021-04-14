@@ -74,7 +74,7 @@ router.post(
                     res.json({token});
                 }
              );
-             var id =  await CollegeSchema.findOne({name : college});
+             var id =  await CollegeSchema.findOne({"names" : college});
              var data = await CollegeSchema.findByIdAndUpdate(id.id,{$push : { "student" : student.id}});
              console.log(data);
              res.send('true');
