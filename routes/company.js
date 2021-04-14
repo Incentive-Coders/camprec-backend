@@ -82,7 +82,10 @@ router.post(
             console.log(req.body);
             const errors = validationResult(req);
             let company = await CompanySchema.findOne({email})
-
+            if(company.approve == false)
+            {
+                return res.status(401).json({text : "you are not approved"});
+            }
             if(!errors.isEmpty()){
                 return res.status(401).json({errors : errors.array})
             

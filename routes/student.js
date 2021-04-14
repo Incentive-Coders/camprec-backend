@@ -104,7 +104,10 @@ router.post(
             console.log(req.body);
             const errors = validationResult(req);
             let student = await StudentSchema.findOne({email})
-
+            if(student.approve == false)
+            {
+                return res.status(401).json({text : "you are not approved"});
+            }
             if(!errors.isEmpty()){
                 return res.status(401).json({errors : errors.array})
             
