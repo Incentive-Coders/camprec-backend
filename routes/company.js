@@ -84,7 +84,7 @@ router.post(
             let company = await CompanySchema.findOne({email})
             if(company.approve == false)
             {
-                return res.status(400).json({text : "you are not approved"});
+                return res.status(401).json({text : "you are not approved"});
             }
             if(!errors.isEmpty()){
                 return res.status(401).json({errors : errors.array})
