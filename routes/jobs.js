@@ -171,7 +171,7 @@ router.post(
         let {job_id,company_id} = req.body;
         var data = await JobSchema.findByIdAndDelete(job_id);
         console.log(data);
-        var datas = await  CompanySchema.findByIdAndUpdate(company_id,{$pull, "jobs" : job_id});
+        var datas = await  CompanySchema.findByIdAndUpdate(company_id,{$pull : {"jobs" : job_id}});
         res.send(datas);
     }
 );
