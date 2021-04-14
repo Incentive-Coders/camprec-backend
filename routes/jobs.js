@@ -168,9 +168,11 @@ router.post(
 router.post(
     '/delete',
     async (req,res) => {
-        let {job_id} = req.body;
+        let {job_id,company_id} = req.body;
         var data = await JobSchema.findByIdAndDelete(job_id);
-        res.send(data);
+        console.log(data);
+        var datas = await  CompanySchema.findByIdAndUpdate(company_id,{$pull, "jobs" : job_id});
+        res.send(datas);
     }
 );
 

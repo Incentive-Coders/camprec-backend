@@ -251,9 +251,14 @@ router.post(
     "/jaccept",
     async (req,res) => {
         let {job_id,student_id} = req.body;
-        let student = await StudentSchema.findOne(student_id,{$find : {"job" : job_id}});
-        if(student){
-            return res.status(401).json("Already Applied");
+        let student = await StudentSchema.findById(student_id);
+        let datas = student.job;
+        for(i = 0;i<datas.length;i++)
+        {
+            if(datas[i] == job_id)
+            {
+                return res.send("Already Applied");
+            }
         }
         var data = await StudentSchema.findByIdAndUpdate(student_id,{$push : { "job" : job_id}});
         res.send(data);
