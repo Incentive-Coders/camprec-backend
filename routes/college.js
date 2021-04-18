@@ -160,8 +160,8 @@ router.post(
         check('email','type your email').isEmail(),
     ],
     async (req,res) => {
-        let {email} = req.body;
-        const data = await CollegeSchema.findOne({email});
+        let {college_id} = req.body;
+        const data = await CollegeSchema.findById(college_id);
         const len = data.student.length;
         let data_s = [];
         for(let i = 0;i<len;i++)
