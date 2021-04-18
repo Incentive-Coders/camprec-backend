@@ -53,8 +53,9 @@ router.post(
 router.post(
     "/list" ,
     async (req,res) => {
+        let {company_id} = req.body;
         console.log(req.body);
-        var data = await CompanySchema.findById(req.body.company_id);
+        var data = await CompanySchema.findById(company_id);
         let job = [];
         for (i = 0;i<data.jobs.length;i++)
             job.push(await JobSchema.findById(data.jobs[i]));
