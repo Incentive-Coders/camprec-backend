@@ -156,9 +156,6 @@ router.get(
 
 router.post(
     '/studentlist',
-    [
-        check('email','type your email').isEmail(),
-    ],
     async (req,res) => {
         let {college_id} = req.body;
         const data = await CollegeSchema.findById(college_id);
