@@ -36,4 +36,15 @@ router.post(
     }
 );
 
+router.post(
+    '/premium',
+    async (req,res) => { 
+        let {email} = req.body;
+        var data = await StudentSchema.findOne({email : email});
+        var tt = true;
+        var data_s = await StudentSchema.findByIdAndUpdate(data.id,{premium : tt});
+        res.send(data_s);
+    } 
+)
+
 module.exports = router;
