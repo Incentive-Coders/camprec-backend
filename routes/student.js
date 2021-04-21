@@ -299,7 +299,9 @@ router.post(
     '/showjob',
     async (req,res) => {
         let {college} = req.body;
-        var data = CollegeSchema.find({name : college});
+        var data = await CollegeSchema.findOne({name : college});
+        console.log(data);
+        console.log(data.job);
         res.send(data.job);
     }
 )
