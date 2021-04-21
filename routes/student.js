@@ -298,8 +298,8 @@ router.get(
 router.post(
     '/showjob',
     async (req,res) => {
-        let {college_id} = req.body;
-        var data = CollegeSchema.findById(college_id);
+        let {college} = req.body;
+        var data = CollegeSchema.find({name : college});
         res.send(data.job);
     }
 )
