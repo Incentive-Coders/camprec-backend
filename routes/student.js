@@ -283,4 +283,25 @@ router.get(
     }
 );
 
+
+router.get(
+    '/premium/:page',
+    async (req,res) => {
+        var page = req.params.page;
+        console.log("list");
+        page = (page - 1) * 10;
+        const data = await StudentSchema.find({premium : false},{password : 0},{skip: page, limit: 10});
+        res.send(data);
+    }
+);
+
+router.post(
+    '/showjob',
+    async (req,res) => {
+        let {college_id} = req.body;
+        var data = CollegeSchema.findById(college_id);
+        res.send(data.job);
+    }
+)
+
 module.exports = router;
