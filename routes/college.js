@@ -205,7 +205,7 @@ router.post(
     "/jaccept",
     async (req,res) => {
         let {job_id,college_id} = req.body;
-        let college = await CollegeSchema.findOne(college_id);
+        let college = await CollegeSchema.findById(college_id);
         let datas = college.job;
         for(i = 0;i<datas.length;i++)
         {
