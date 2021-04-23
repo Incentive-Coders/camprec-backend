@@ -300,8 +300,6 @@ router.post(
     async (req,res) => {
         let {college} = req.body;
         var data = await CollegeSchema.findOne({name : college});
-        console.log(data);
-        console.log(data.job);
         res.send(data.job);
     }
 )
