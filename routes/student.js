@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { check,validationResult } = require('express-validator');
 const StudentSchema = require('../schemas/Student');
-const Student = require("../schemas/Student");
 const config = require('config');
 const CollegeSchema = require("../schemas/College");
 
@@ -74,8 +73,9 @@ router.post(
                     res.json({token});
                 }
              );
-             var id =  await CollegeSchema.findOne({"names" : college});
-             var data = await CollegeSchema.findByIdAndUpdate(id.id,{$push : { "student" : student.id}});
+             var idd =  await CollegeSchema.findOne({"name" : college});
+             console.log(idd.id);
+             var data = await CollegeSchema.findByIdAndUpdate(idd.id,{$push : { "student" : student.id}});
              console.log(data);
              res.send('true');
         } catch (error){
