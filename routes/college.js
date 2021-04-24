@@ -137,8 +137,8 @@ router.get(
     async (req,res) => {
         var page = req.params.page;
         console.log("list");
-        page = (page - 1) * 10;
-        const data = await CollegeSchema.find({},{password : 0},{skip : page, limit : 10});
+        page = (page - 1) * 8;
+        const data = await CollegeSchema.find({},{password : 0},{skip : page, limit : 8});
         res.send(data);
     }
 );
@@ -148,8 +148,8 @@ router.get(
     async (req,res) => {
         var page = req.params.page;
         console.log("list");
-        page = (page - 1) * 8;
-        const data = await CollegeSchema.find({approve : false},{password : 0},{skip : page, limit : 8});
+        page = (page - 1) * 10;
+        const data = await CollegeSchema.find({approve : false},{password : 0},{skip : page, limit : 10});
         res.send(data);
     }
 );
