@@ -1,4 +1,4 @@
-const express_ = require('express');
+/*const express_ = require('express');
 const app = express_();
 const connectToDatabases = require('./config/connectToDatabase');
 const rateLimit = require("express-rate-limit");
@@ -49,4 +49,26 @@ let PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => 
     console.log(`the server is running on the port: ${PORT}`)
-);
+);*/
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const port = process.env.PORT || 3000;
+
+app.post('/add',(req,res) => {
+
+   data = {
+      name:req.body.name
+   };
+
+   console.log(data);
+   res.send(data);
+});
+
+app.listen(port,() => console.log(`Server is up and running at ${port}`));
