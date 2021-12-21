@@ -53,6 +53,8 @@ app.listen(PORT, () =>
 
 const express = require('express');
 const bodyParser = require('body-parser');
+var cors = require('cors');
+app.use(cors());//to follow cors policy
 
 const app = express();
 
