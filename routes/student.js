@@ -97,16 +97,16 @@ router.post(
             console.log(req.body);
             const errors = validationResult(req);
             let student = await StudentSchema.findOne({email})
-            if(student.approve == false)
+            if(!student){
+                return res.status(401).json("Not Found");
+            }
+            if((student.approve == false) || (student.approve == null))
             {
                 return res.status(401).json({text : "you are not approved"});
             }
             if(!errors.isEmpty()){
                 return res.status(401).json({errors : errors.array})
             
-            }
-            if(!student){
-                return res.status(401).json("Not Found");
             }
 
             let isPasswordMatch = await bcryptjs.compare(password,student.password);
