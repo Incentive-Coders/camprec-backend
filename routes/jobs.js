@@ -18,7 +18,7 @@ router.post(
     [
         check('job_title','jobtitle is required').not().isEmpty(),
         check('job_description','job_description is required').not().isEmpty(),
-        check('comapany_id','company_id is not given')
+        check('company_id','company_id is not given')
     ],
     async (req,res) => {
         try{
@@ -53,15 +53,17 @@ router.post(
 router.post(
     "/list" ,
     async (req,res) => {
-        let {company_id} = req.body;
+        let {company_id,job_id} = req.body;
         console.log(req.body);
         var data = await CompanySchema.findById(company_id);
+        var jobs = data.jobs;
         let job = [];
-        for (i = 0;i<data.jobs.length;i++)
-            job.push(await JobSchema.findById(data.jobs[i]));
+        for (i = 0; i<jobs.length;i++)
+            job.push(await JobSchema.findById(jobs));
         res.send(job)
     }
-);
+); 
+
 
 router.post(
     "/saccept",

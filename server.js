@@ -45,39 +45,15 @@ app.use("/api/jobs", require('./routes/jobs'));
 
 app.use("/api/admin", require('./routes/admin'));
 
-let PORT = process.env.PORT || 4000;
+let PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => 
     console.log(`the server is running on the port: ${PORT}`)
 );
-const connectToDatabases = require('./config/connectToDatabase');
-const express = require('express');
-const bodyParser = require('body-parser');
-var cors = require('cors');
 
-connectToDatabases();
 
-const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
-const port = process.env.PORT || 5000;
 
-app.use("/api/student", require('./routes/student'));
-app.use("/api/college", require('./routes/college'));
-app.use("/api/company", require('./routes/company'));
-app.use("/api/admin", require('./routes/admin'));
-app.use("/api/jobs", require('./routes/jobs'));
 
-app.post('/add',(req,res) => {
 
-   data = {
-      name:req.body.name
-   };
-
-   console.log(data);
-   res.send(data);
-});
-
-app.listen(port,() => console.log(`Server is up and running at ${port}`));
