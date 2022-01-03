@@ -1,4 +1,4 @@
-/*const express_ = require('express');
+const express_ = require('express');
 const app = express_();
 const connectToDatabases = require('./config/connectToDatabase');
 const rateLimit = require("express-rate-limit");
@@ -49,7 +49,7 @@ let PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => 
     console.log(`the server is running on the port: ${PORT}`)
-);*/
+);
 const connectToDatabases = require('./config/connectToDatabase');
 const express = require('express');
 const bodyParser = require('body-parser');

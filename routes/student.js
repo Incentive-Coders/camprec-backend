@@ -65,6 +65,60 @@ router.post(
         premium: premium,
         approve: approve,
       });
+             const payload = {
+                student : {
+                    id : student.id
+                }
+             }
+             jwt.sign(
+                payload,
+                config.get('jwtSecret'),
+                (err,token) =>
+                {
+                    if(err)
+                    {
+                        throw err;
+                    }      
+                    res.json({token});
+                }
+             );
+             var idd =  await CollegeSchema.findOne({"name" : college});
+             console.log(idd.id);
+             var data = await CollegeSchema.findByIdAndUpdate(idd.id,{$push : { "student" : student.id}});
+             console.log(data);
+             res.send('true');
+        } catch (error){
+            console.log(error.message);
+            return res.status(500).json({ msg : "Server Error....."});
+        }
+    }
+);
+
+router.post(
+    '/login',
+    [
+        check('email','type your email').isEmail(),
+        check('password','Password is required').not().isEmpty()
+    ],
+    async (req,res) => {
+        try {
+            let {email,password} = req.body;
+            console.log(req.body);
+            const errors = validationResult(req);
+            let student = await StudentSchema.findOne({email})
+            if(!student){
+                return res.status(401).json("Not Found");
+            }
+            if((student.approve == false) || (student.approve == null))
+            {
+                return res.status(401).json({text : "you are not approved"});
+            }
+            if(!errors.isEmpty()){
+                return res.status(401).json({errors : errors.array})
+            
+            }
+
+            let isPasswordMatch = await bcryptjs.compare(password,student.password);
 
       // student = new StudentSchema({
       //     email,
