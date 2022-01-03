@@ -8,6 +8,7 @@ const StudentSchema = require('../schemas/Student');
 const config = require('config');
 const student = require("../schemas/Student");
 var speakeasy = require('speakeasy');
+const dotenv = require('dotenv').config();
 
 router.get(
     '/',
@@ -55,9 +56,9 @@ router.post(
                     id : college.id
                 }
              }
-             jwt.sign(
+            const authtoken = jwt.sign(
                 payload,
-                config.get('jwtSecret'),
+                process.env.JWT_SECRET,
                 (err,token) =>
                 {
                     if(err)
@@ -66,7 +67,8 @@ router.post(
                     }      
                     res.json({token});
                 }
-             )
+            );
+            res.json({ authtoken });
              res.send('true');
         } catch (error){
             console.log(error.message);
@@ -109,7 +111,7 @@ router.post(
                  }
                  jwt.sign(
                     payload,
-                    config.get('jwtSecret'),
+                    process.env.JWT_SECRET,
                     (err,token) =>
                     {
                         if(err)

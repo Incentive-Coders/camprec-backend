@@ -76,6 +76,7 @@ let StudentSchemas = mongoose.Schema({
     resume : {
         type : String
     },
+    website : { type : String},
     social_media : {
         twitter : {
             type : String
@@ -99,6 +100,7 @@ let StudentSchemas = mongoose.Schema({
     job: [{
         type : mongoose.Schema.ObjectId
     }],
+    vedio_link : { type : String},
     premium:{
         type : Boolean,
         required : true
