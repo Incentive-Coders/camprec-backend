@@ -112,26 +112,10 @@ router.post(
             let isPasswordMatch = await bcryptjs.compare(password,student.password);
 
             if(isPasswordMatch === true){
-                const payload = {
-                    student : {
-                        id : student.id
-                    }
-                 }
-                 jwt.sign(
-                    payload,
-                    config.get('jwtSecret'),
-                    (err,token) =>
-                    {
-                        if(err)
-                        {
-                            throw err;
-                        }      
-                        res.send(student);
-                    }
-                 )
-                
+                res.send(student);    
             }
             else {
+                console.log('titu');
                 res.status(401).json('password dont match');
             }
 
