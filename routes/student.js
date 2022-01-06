@@ -120,22 +120,6 @@ router.post(
 
             let isPasswordMatch = await bcryptjs.compare(password,student.password);
 
-      // student = new StudentSchema({
-      //     email,
-      //     password,
-      //     name,
-      //     college,
-      //     cgpa,
-      //     about,
-      //     date_of_birth,
-      //     resume,
-      //     social_media : {twitter,facebook,linkedin,instagram},
-      //     contactno,
-      //     premium,
-      //     approve
-      //  });
-      //  await student.save();
-
       const payload = {
         student: {
           id: student.id,
