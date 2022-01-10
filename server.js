@@ -45,7 +45,7 @@ app.use("/api/jobs", require('./routes/jobs'));
 
 app.use("/api/admin", require('./routes/admin'));
 
-let PORT = process.env.PORT || 5000;
+let PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => 
     console.log(`the server is running on the port: ${PORT}`)
